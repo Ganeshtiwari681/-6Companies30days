@@ -1,0 +1,10 @@
+class Solution:
+    def minMoves2(self, nums: List[int]) -> int:
+        ans=0
+        nums.sort()
+        nu=nums[len(nums)//2]
+        for i in nums:
+            ans+=abs(i-nu)
+        return ans
+
+        
