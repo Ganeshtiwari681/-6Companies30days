@@ -1,0 +1,23 @@
+import bisect
+import itertools
+import random
+
+class Solution:
+
+    def __init__(self, rects: List[List[int]]):
+        self.rects = rects
+        sizes = ((x2-x1+1) * (y2-y1+1) for x1, y1, x2, y2 in rects)
+        self.weights = list(itertools.accumulate(sizes, initial=0))
+
+    def pick(self) -> List[int]:
+        weight = random.randint(1, self.weights[-1])
+        idx = bisect.bisect_left(self.weights, weight)
+        x1, y1, x2, y2 = self.rects[idx-1]
+        bias = weight - self.weights[idx-1] - 1
+        bias_x, bias_y = divmod(bias, y2 - y1 + 1)
+        return [bias_x + x1, bias_y + y1]
+
+
+# Your Solution object will be instantiated and called as such:
+# obj = Solution(rects)
+# param_1 = obj.pick()
