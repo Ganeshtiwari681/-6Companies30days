@@ -1,0 +1,9 @@
+class Solution:
+    def findRepeatedDnaSequences(self, s: str) -> List[str]:
+        if len(s) <= 10: return []
+        start_i, end_i, cnts = 0, 9, defaultdict(int)
+        while(end_i < len(s)):
+            cnts[ s[start_i:end_i +1]]+=1
+            start_i +=1; end_i +=1
+            
+        return list(filter(lambda x: cnts[x] > 1, cnts.keys()))
