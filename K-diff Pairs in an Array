@@ -1,0 +1,14 @@
+class Solution:
+    def findPairs(self, nums: List[int], k: int) -> int:
+        se=set()
+        for i in range(len(nums)):
+            if nums[i]-k in nums and i != nums.index(nums[i]-k):
+                if (nums[i],nums[i]-k) not in se and (nums[i]-k,nums[i]) not in se:
+                    se.add((nums[i],nums[i]-k))
+            if nums[i]+k in nums and i != nums.index(nums[i]+k):
+                if (nums[i],nums[i]+k) not in se and (nums[i]+k,nums[i]) not in se:
+                    se.add((nums[i],nums[i]+k))    
+        print(se)
+        return len(se)
+
+        
